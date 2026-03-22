@@ -1,0 +1,7 @@
+{
+  "name": "brawlblast-peer",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "peer": "^0.9.1" }
+}

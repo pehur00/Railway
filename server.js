@@ -1,7 +1,19 @@
-const { PeerServer } = require('peer');
-const server = PeerServer({
-  port: process.env.PORT || 9000,
+const express = require('express');
+const { ExpressPeerServer } = require('peer');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => res.send('BrawlBlast PeerJS Server running'));
+
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log('Server listening on port', PORT);
+});
+
+const peerServer = ExpressPeerServer(server, {
   path: '/',
+  key: 'brawlblast',
   corsOptions: { origin: '*' }
 });
-console.log('PeerJS server running on port', process.env.PORT || 9000);
+
+app.use('/peerjs', peerServer);
